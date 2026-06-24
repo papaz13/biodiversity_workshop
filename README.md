@@ -120,5 +120,5 @@ e.g.: Update the https://forms.gle/8Jdm1aybL9sqzNEw6 URL in `[Give Feedback](htt
 
 <img align="center" src="./images/agenda-raw.png"  vspace="10" width="800">
 
-<img align="center" src="./images/agenda-githubpages.png"  vspace="10" width="800">
+<img align="center" src="./images/agenda-githubpages.png"  vspace="10" width="800"> -->
 
