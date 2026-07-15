@@ -24,6 +24,5 @@ This table is just an example. Actual 12-day overview will differ based on the c
 | 1               | Exploring National Biodiversity Data in GEE         | July 21 2026  |   | 
 | 2               | Ecosystem Change Detection                      | July 22 2026   |   |
 | 3             | GEE Script 5: Carbon Biomass Baselines using embedding.
-                 | July 23 2026     | In-person |
 
 
