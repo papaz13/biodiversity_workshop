@@ -12,15 +12,24 @@ nav_order: 2
 Navegar en la interfaz de Google Earth Engine (GEE), explorar conjuntos de datos globales disponibles en el Data Catalog, recortar esos conjuntos de datos para un área de interés (ROI) de su país, analizar el riesgo del ecosistema y calcular una serie de indicadores de biodiversidad.
 
 ## Datos a emplear
-**Date**: DATE  
-**Instructor(s):** NAME(S)
+1. Imágenes Landsat-8, Sentinel-2
+2. Linea base para análisis de riesgo de ecosistemas:
+- Ecosystem typology, source: IUCN (Level 3) - Global
+- Pérdida y ganancia de bosque: Hansen - Global
+- Aboveground Biomass - Global
+- Ecosistemas
 
-| Time          | Topics                                                                                                                    |
-|---------------|---------------------------------------------------------------------------------------------------------------------------|
-| 09:00 - 09:30 | Welcome and set-up check<br>Why QGIS?<br>Interface overview                                                               |
-| 09:30 - 10:45 | Making and customizing a map using vector data: create a national parks study area map                                    |
-| 10:45 - 11:00 | Coffee break                                                                                                              |
-| 11:00 - 12:00 | Making and customizing a map using raster data: create a DEM hillshade map                                                |
-| 12:00 - 13:00 | Lunch                                                                                                                     |
-| 13:00 - 15:00 | Morning recap<br>Geoprocessing and spatial analysis: create a buffer and calculate zonal statistics using population data |
+
+## Repositorio GEE
+https://code.earthengine.google.com/?accept_repo=users/paulapaz1101/biodiversity_workshop 
+
+## Scripts
+00_Básico_JavaScript 
+01_Visualización_imágen 
+02_Filtrar_imágenes_Landsat
+03_Composición_Sentinel2
+04_Área_GlobalEcosystemTypology
+05_Representatividad_AP_Ecoregiones
+06_Stock_Perdida_Carbono
+
 
