@@ -24,10 +24,10 @@ Navegar en la interfaz de Google Earth Engine (GEE), explorar conjuntos de datos
 https://code.earthengine.google.com/?accept_repo=users/paulapaz1101/biodiversity_workshop 
 
 ## Scripts
-00_Básico_JavaScript 
-01_Visualización_imágen 
-02_Filtrar_imágenes_Landsat
-03_Composición_Sentinel2
+00_Básico_JavaScript //
+01_Visualización_imágen// 
+02_Filtrar_imágenes_Landsat//
+03_Composición_Sentinel2//
 04_Área_GlobalEcosystemTypology
 05_Representatividad_AP_Ecoregiones
 06_Stock_Perdida_Carbono
