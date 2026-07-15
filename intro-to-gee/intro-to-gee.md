@@ -11,6 +11,10 @@ nav_order: 2
 # Introduction to GEE
 Navegar en la interfaz de Google Earth Engine (GEE), explorar conjuntos de datos globales disponibles en el Data Catalog, recortar esos conjuntos de datos para un área de interés (ROI) de su país, analizar el riesgo del ecosistema y calcular una serie de indicadores de biodiversidad.
 
+## Set-up
+1. [Install](https://www.qgis.org/en/site/forusers/download.html) QGIS if not already installed.
+2. [Download](https://drive.google.com/drive/folders/1zIV-ADnNxFNIDcDPvQPu8nmE5X9esnvl?usp=share_link) and upzip the data folder for the lesson. Save the upzipped folder on your Desktop. Make sure the folder is named `intro-gis-data`.
+
 ## Datos a emplear
 1. Imágenes Landsat-8, Sentinel-2
 2. Linea base para análisis de riesgo de ecosistemas:
