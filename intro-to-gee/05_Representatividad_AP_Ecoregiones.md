@@ -313,6 +313,8 @@ Export.image.toDrive({
 - **`fileFormat: 'CSV'`**: Formato del archivo tabular exportado. Otros valores válidos para tablas son `'SHP'` (Shapefile), `'GeoJSON'` y `'KML'` — estos dos últimos requieren que los features tengan geometría, lo cual no es el caso de `ecoStats` (son features con `geometry: null`).
 - **`Export.image.toDrive({...})` (bloque comentado)**: Exporta una imagen (acá, el raster binario `apImg`) en vez de una tabla. `image` es la imagen a exportar; `region` define el área geográfica a exportar (se usa el rectángulo envolvente por la misma razón de rendimiento explicada en el Paso 1); `scale` y `maxPixels` cumplen el mismo rol que en `reduceRegion` (Sección 3).
 
+**Código completo:** [https://code.earthengine.google.com/8b095709a0ed83a22be4416bdc523989](https://code.earthengine.google.com/8b095709a0ed83a22be4416bdc523989)
+
 
 
 
