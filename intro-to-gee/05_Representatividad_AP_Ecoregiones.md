@@ -2,7 +2,7 @@
 layout: page
 title: 05_Representatividad_AP_Ecoregiones
 parent: /intro-to-gee
-nav_order: 1
+nav_order: 3
 ---
 
 # Objetivos
