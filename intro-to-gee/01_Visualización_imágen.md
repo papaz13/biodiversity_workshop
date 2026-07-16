@@ -21,7 +21,7 @@ nav_order: 2
 ## Paso a paso
 
 ### Paso 1: Cargar conjunto de datos del Earth Catalog
-En este ejercicio vamos a `importar` el modelo de elevación de 30 m de NASA SRTM desde el [Data Catalog](https://developers.google.com/earth-engine/datasets) de Earth Engine Cada dataset tiene una página propia con su descripción, resolución, fechas disponibles, bandas, y — lo más importante — su **ID único**, que es lo que necesitamos para cargarlo en nuestro código.
+En este ejercicio vamos a `importar` el modelo de elevación de 30 m de NASA SRTM desde el [Data Catalog](https://developers.google.com/earth-engine/datasets) de Earth Engine Cada dataset tiene una página propia con su descripción, resolución, fechas disponibles, bandas, y su **ID único**, que es lo que necesitamos para cargarlo en nuestro código.
 
 Para encontrar el dataset SRTM, puede buscar "SRTM" directamente en la barra de búsqueda de la parte superior del Code Editor. Al hacer clic en el resultado, se abre una ventana con la documentación del dataset, incluyendo un botón `Import` que agrega automáticamente la imagen a su script como una variable.
 
@@ -62,6 +62,7 @@ Map.addLayer(zonas,
               "Elevación clasificada");
 ```
 
+### Código completo
 Script "`01_Visualización_imágen`" del repositorio y la carpeta `day_1` o link directo:
 [https://code.earthengine.google.com/fb060a9e239501ce553cbf9257b073fd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/fb060a9e239501ce553cbf9257b073fd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
 

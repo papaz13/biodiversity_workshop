@@ -86,20 +86,21 @@ Map.addLayer(resultado, {min: 7230, max: 15000}, 'Cortado');
 
 > **Nota técnica:** Los valores `min` y `max` (7230–15000) ajustan el contraste de visualización según el rango de reflectancia de superficie (`SR`) característico del producto Collection 2, Nivel 2 de Landsat 8. Para conocer los nombres de las bandas de la colección observar en el Data Catalog -> BANDS. 
 
-**Paso 8: Filtrar imágenes por porcentaje de cobertura de nubes**
 
-Aplique un filtro adicional sobre la colección `filtrado` usando `ee.Filter.lt()`, para conservar únicamente las imágenes cuyo atributo `CLOUD_COVER_LAND` sea menor a 20 (es decir, menos del 20% de nubes sobre tierra).
+### Paso 4: Filtrar imágenes por porcentaje de cobertura de nubes
+
+Aplicar un filtro adicional sobre la colección `filtrado` usando `ee.Filter.lt()`, para conservar únicamente las imágenes cuyo atributo `CLOUD_COVER_LAND` sea menor a 20 (es decir, menos del 20% de nubes sobre tierra).
 
 ```javascript
 var filtradoNubes = filtrado.filter(ee.Filter.lt('CLOUD_COVER_LAND',20));
 print('Número de imágenes con filtro de nubes', filtradoNubes.size());
 ```
 
-Compare el resultado de `filtradoNubes.size()` con el de `filtrado.size()` (Paso 5) para verificar cuántas imágenes fueron descartadas por el filtro de nubes.
+Comparar el resultado de `filtradoNubes.size()` con el de `filtrado.size()` para verificar cuántas imágenes fueron descartadas por el filtro de nubes.
 
-**Paso 9: Generar y visualizar la composición filtrada por nubes**
+**Generar y visualizar la composición filtrada por nubes**
 
-Repita el proceso de mediana, recorte y selección de bandas, esta vez sobre la colección `filtradoNubes`, y agregue el resultado al mapa como una nueva capa.
+Repetir el proceso de mediana, recorte y selección de bandas, esta vez sobre la colección `filtradoNubes`, y agregue el resultado al mapa como una nueva capa.
 
 ```javascript
 var medianaNubes = filtradoNubes.median();
@@ -118,3 +119,7 @@ Use el panel `Layers` del mapa para alternar la visibilidad entre las capas `Cor
 
 - Revise la cantidad de imágenes devueltas al filtrar con `lt` (menor que), así como los metadatos (`properties`) de algunas imágenes individuales dentro de la colección.
 - Cambie el filtro de `ee.Filter.lt()` a `ee.Filter.gt()` (mayor que) y observe cómo cambia la composición resultante al conservar únicamente las imágenes con **más** del 20% de cobertura de nubes.
+
+### Código completo
+Script "`02_Filtrar_imágenes_Landsat`" del repositorio y la carpeta `day_1` o link directo:
+[https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
