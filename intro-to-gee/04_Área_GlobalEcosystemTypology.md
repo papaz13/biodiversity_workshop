@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Making a Map with Vector Data
-parent: Introduction to GIS with QGIS
-nav_order: 2
+title: 04_Área_GlobalEcosystemTypology
+parent: "Introducción a GEE"
+nav_order: 4
 ---
 
 # Making a Map with Vector Data

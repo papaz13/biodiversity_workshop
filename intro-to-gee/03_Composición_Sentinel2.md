@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Spatial Analysis
-parent: Introduction to GIS with QGIS
-nav_order: 4
+title: 03_Composición_Sentinel2
+parent: "Introducción a GEE"
+nav_order: 3
 ---
 
 # Spatial Analysis
