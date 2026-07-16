@@ -1,5 +1,5 @@
-title: Regional Workshop
-description: A website template for the Biodiversity LATAM trainings
+title: Biodiversity Workshop
+description: A website for the Biodiversity Regional Workshop
 baseurl: "/biodiversity_workshop" # the subpath of your site, e.g. /blog
 url: "https://papaz13.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
