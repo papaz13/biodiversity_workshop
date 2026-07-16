@@ -6,7 +6,7 @@ This repository is a template to set up a website on [`github-pages`](https://pa
 
 :construction: Everything below this line is under construction and not final :construction:
 
-## Configuration
+<!-- ## Configuration
 
 The repository is configured according to the following structure:
 
@@ -46,7 +46,7 @@ github desktop and external editor
 
 markdown 
 
-repository vs website
+repository vs website -->
 
 <!-- ## Setup Instructions
 
