@@ -6,7 +6,7 @@ nav_order: 2
 ---
 
 # 01_Visualización_imágen
-## Objectivos
+## Objetivos
 1. Importar imágen desde el catalogo de datos
 2. Visualizar en el mapa
 3. Clasificar valores continuos
