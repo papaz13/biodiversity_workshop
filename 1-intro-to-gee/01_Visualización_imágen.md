@@ -24,7 +24,6 @@ nav_order: 2
 En este ejercicio vamos a `importar` el modelo de elevación de 30 m de NASA SRTM desde el [Data Catalog](https://developers.google.com/earth-engine/datasets) de Earth Engine Cada dataset tiene una página propia con su descripción, resolución, fechas disponibles, bandas, y su **ID único**, que es lo que necesitamos para cargarlo en nuestro código.
 
 Para encontrar el dataset SRTM, puede buscar "SRTM" directamente en la barra de búsqueda de la parte superior del Code Editor. Al hacer clic en el resultado, se abre una ventana con la documentación del dataset, incluyendo un botón `Import` que agrega automáticamente la imagen a su script como una variable.
-
 <p align="center">
   <img src="{{ '/images/intro-gee/fig8.png' | relative_url }}" width="100" style="margin: 10px 0;">
 </p>
