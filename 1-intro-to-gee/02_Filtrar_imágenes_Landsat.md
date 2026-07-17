@@ -13,13 +13,14 @@ nav_order: 3
 
 ## Datos
 - Límites administrativos, nivel pais (level0) FAO, collection: `FAO/GAUL/2015/level0`
-<p align="center">
-  <img src="images/intro-gee/fig11.png" width="600" style="margin: 10px 0;">
+  <p align="center">
+  <img src="{{ '/images/intro-gee/fig11.png' | relative_url }}" width="600" style="margin: 10px 0;">
 </p>
-- Imágenes Landsat8 Collection 2, Nivel 2, collection: `LANDSAT/LC08/C02/T1_L2`
+- Imágenes Landsat 8 Collection 2, Nivel 2, collection: `LANDSAT/LC08/C02/T1_L2`
 <p align="center">
-  <img src="images/intro-gee/fig9.png" width="600" style="margin: 10px 0;">
+  <img src="{{ '/images/intro-gee/fig9.png' | relative_url }}" width="600" style="margin: 10px 0;">
 </p>
+
 ## Método
 - Emplear función `.where()`
 - Uso de operadores de comparación `.gt()` (greater than, "mayor que"), `.lt()` (menor que), o `.eq()` (igual a).
@@ -117,7 +118,7 @@ var resultado = cortadoNubes.select('SR_B4', 'SR_B3', 'SR_B2');
 Map.addLayer(resultado, {min: 7230, max: 15000}, 'Cortado con filtro de nubes');
 ```
 
-**Paso 10: Comparar resultados**
+**Comparar resultados**
 
 Use el panel `Layers` del mapa para alternar la visibilidad entre las capas `Cortado` y `Cortado con filtro de nubes`, y observe si el filtro de nubes mejora o no la calidad visual de la composición.
 
