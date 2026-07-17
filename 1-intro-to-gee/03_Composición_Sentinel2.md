@@ -105,6 +105,13 @@ function mascaraNubesS2(imagen) {
 NDVI: (NIR-Red)/(NIR+Red)
 LSWI: (NIR-SWIR1)/(NIR+SWIR1)
 NDMI: (SWIR2-Red)/(SWIR2+Red)
+
+| Índice | Fórmula |
+|---|---|
+| **NDVI** | (NIR − Red) / (NIR + Red) |
+| **LSWI** | (NIR − SWIR1) / (NIR + SWIR1) |
+| **NDMI** | (SWIR2 − Red) / (SWIR2 + Red) |
+
 Utilizamos la función de GEE 'normalizedDifference'
 
 ```javascript
