@@ -7,9 +7,10 @@ nav_order: 5
 
 # 04_Área_GlobalEcosystemTypology
 ## Objetivo
-1. Definir un área de interés (Parque Nacional / área protegida).
-2. Calcular el área de cada tipo de ecosistema interceptado con el área de interés, usando el mapa global de la IUCN.
-3. Comparar los resultados con el mapa nacional de ecosistemas de Colombia.
+1. Definir un área de interés (Parque Nacional Chingaza).
+2. Calcular el área de cada tipo de ecosistema interceptado con el ROI, usando el mapa global de la IUCN y el mapa nacional de Colombia.
+3. Visualizar los ecosistemas IUCN coloreados por categoría, con leyenda dinámica.
+4. Exportar las estadísticas de ambos mapas a Google Drive.
 
 ## Datos
 - Áreas protegidas (WDPA), collection: `WCMC/WDPA/current/polygons`
@@ -33,6 +34,60 @@ nav_order: 5
 ## Paso a paso
 
 ### Paso 1: Definir el área de interés
+Cargar la colección de áreas protegidas (`WCMC/WDPA/current/polygons`) y filtrarla con `ee.Filter.eq()` para obtener el polígono correspondiente al Parque Nacional Chingaza. Centrar el mapa sobre el resultado.
+
+```javascript
+var WDPA = ee.FeatureCollection("WCMC/WDPA/current/polygons");
+var roi = WDPA.filter(
+  ee.Filter.eq('NAME', 'Chingaza'));
+Map.centerObject(roi, 10);
+```
+
+> **Nota técnica:** aquí `roi` es una `FeatureCollection` (puede contener más de un polígono si el área protegida está dividida en varias partes). Si más adelante notas inconsistencias en los cálculos de área, considera usar `roi.geometry().dissolve()` para trabajar con una única geometría unificada en las funciones de intersección.
+
+### Paso 2: Crear la función reutilizable para calcular área por categoría
+
+Definir `calcularAreaPorCategoria()`, que recibe cualquier colección de ecosistemas, el ROI, el nombre del campo de categoría (varía según el dataset) y el nombre que tendrá esa categoría en el resultado final. La función recorta cada polígono al ROI, calcula su área en hectáreas, descarta fragmentos menores a 0.1 ha, y agrupa/suma las áreas por categoría en un solo paso usando `reduceColumns()`.
+
+# Parámetros de entrada:
+- coleccion: la FeatureCollection de ecosistemas a analizar (ej. IUCN o Colombia).
+- roiGeom: la geometría del área de interés (ej. Chingaza).
+- campoCategoria: el nombre del campo que identifica el tipo de ecosistema en esa colección específica (ej. 'efg_code' para IUCN, 'ecos_gener' para Colombia - revisar en cada dataset).
+- nombreSalida: el nombre que quieres que tenga esa categoría en el resultado final (ej. 'EFG_Code', 'Ecos_Gener').
+
+Función parte 1:
+a.calcula área de cada polígono individual que se sobrepone en ROI
+b.  calcula el área  en m2 y convierte el valor en ha
+Retorna: área, categoria 
+
+
+```javascript
+function calcularAreaPorCategoria(coleccion, roiGeom, campoCategoria, nombreSalida) {
+  var conArea = coleccion.filterBounds(roiGeom).map(function(feature) {
+    var interseccion = feature.geometry().intersection(roiGeom, ee.ErrorMargin(1));
+    var areaHa = interseccion.area(ee.ErrorMargin(1)).divide(10000);
+    return feature.set('Area_Ha', areaHa)
+                  .set('Categoria', feature.get(campoCategoria));
+  }).filter(ee.Filter.gt('Area_Ha', 0.1));
+
+  var agrupado = conArea.reduceColumns({
+    reducer: ee.Reducer.sum().group({groupField: 1, groupName: 'Categoria'}),
+    selectors: ['Area_Ha', 'Categoria']
+  });
+
+  return ee.FeatureCollection(
+    ee.List(agrupado.get('groups')).map(function(g) {
+      g = ee.Dictionary(g);
+      var props = {'Area_Total_Ha': g.get('sum')};
+      props[nombreSalida] = g.get('Categoria');
+      return ee.Feature(null, props);
+    })
+  );
+}
+```
+
+
+
 
 
 # Making a Map with Vector Data

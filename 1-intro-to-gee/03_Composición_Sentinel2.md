@@ -211,3 +211,6 @@ Export.image.toAsset({
 
 Ir al panel `Tasks` y presionar `Run` sobre cada tarea de exportación generada.
 
+### Código completo
+Script "`03_Composición_Sentinel2`" del repositorio y la carpeta `day_1` o link directo:
+[https://code.earthengine.google.com/ee01010da4b4ee92bb41c14674dc6c25?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/ee01010da4b4ee92bb41c14674dc6c25?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
