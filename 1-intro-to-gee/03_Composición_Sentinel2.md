@@ -14,11 +14,12 @@ nav_order: 4
 ## Datos
 - Límites administrativos, nivel pais (level0) FAO, collection: `FAO/GAUL/2015/level0`
 <p align="center">
-  <img src="images/intro-gee/fig11.png" width="600" style="margin: 10px 0;">
+  <img src="{{ '/images/intro-gee/fig11.png' | relative_url }}" width="600" style="margin: 10px 0;">
 </p>
+
 - Imágenes Sentinel-2, Nivel 2A (reflectancia de superficie), collection: `COPERNICUS/S2_SR`
 <p align="center">
-  <img src="images/intro-gee/fig9.png" width="600" style="margin: 10px 0;">
+  <img src="{{ '/images/intro-gee/fig12.png' | relative_url }}" width="600" style="margin: 10px 0;">
 </p>
 
 ## Método
@@ -61,7 +62,7 @@ var s2filtrado = s2.filterBounds(area)
 print('Número de imágenes filtradas', s2filtrado.size());
 ```
 
-> ** Nota técnica — Vigencia de la banda `QA60` según el rango de fechas**
+> ** Nota técnica:** Vigencia de la banda `QA60` según el rango de fechas**
 > - **Antes del 25 de enero de 2022:** `QA60` funciona normalmente.
 > - **Entre el 25 de enero de 2022 y el 28 de febrero de 2024:** la banda `QA60` estuvo vacía (siempre en 0, "sin nubes"), incluso en escenas totalmente nubladas. Esto no genera un error de código, sino resultados incorrectos.
 > - **Desde el 28 de febrero de 2024:** Google reconstruyó `QA60` de forma retroactiva a partir de otra banda (`MSK_CLASSI`), por lo que volvió a ser confiable para todo el historial de datos.
@@ -99,7 +100,6 @@ function mascaraNubesS2(imagen) {
   return imagen.addBands(bandas, null, true).updateMask(mascara);
 }
 ```
-
 
 ### Funcion para calcular índices
 NDVI: (NIR-Red)/(NIR+Red)
