@@ -18,7 +18,7 @@ Estos scripts están elaborados para el manejo de datos de biodiversidad en GEE,
 4. Facilitar el aprendizaje entre pares y el intercambio de experiencias entre especialistas en teledetección de seis países, identificando brechas de datos comunes y oportunidades de cooperación regional.
 
 
-## Agenda
+## Agenda ejercicios Google Earth Engine
 
 | Día taller | Tema                                             | Fecha      | 
 |:----------------|:----------------------------------------------------|:---------------|
