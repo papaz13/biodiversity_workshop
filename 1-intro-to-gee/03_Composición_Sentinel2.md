@@ -61,7 +61,7 @@ var s2filtrado = s2.filterBounds(area)
 print('Número de imágenes filtradas', s2filtrado.size());
 ```
 
-> **⚠️ Nota técnica — Vigencia de la banda `QA60` según el rango de fechas**
+> ** Nota técnica — Vigencia de la banda `QA60` según el rango de fechas**
 > - **Antes del 25 de enero de 2022:** `QA60` funciona normalmente.
 > - **Entre el 25 de enero de 2022 y el 28 de febrero de 2024:** la banda `QA60` estuvo vacía (siempre en 0, "sin nubes"), incluso en escenas totalmente nubladas. Esto no genera un error de código, sino resultados incorrectos.
 > - **Desde el 28 de febrero de 2024:** Google reconstruyó `QA60` de forma retroactiva a partir de otra banda (`MSK_CLASSI`), por lo que volvió a ser confiable para todo el historial de datos.
@@ -177,6 +177,7 @@ Map.addLayer(mosaicoMasReciente, paramVisPreProcesada, 'Mosaico Más Reciente');
 
 
 ```javascript
+Exportar para Google Drive.
 Export.image.toDrive({
   image: composicion.toFloat(),
   description: 'composicionMedianaSentinel2_1921',
@@ -185,21 +186,21 @@ Export.image.toDrive({
   scale: 10,
   maxPixels: 1e13
 });
-```
-Exportar a GEE Asset
 
-```javascript
+// Exportar como un GEE Asset.
 Export.image.toAsset({
   image: composicion,
   description: 'composicionMedianaSentinel2_1921',
-  assetId: 'projects/caribbean-trainings/assets/dominican-republic-2022/images/composicionMedianaSentinel2_1921',
+  assetId: 'projects/ee-paulapaz1101/assets/biodiversity_workshop/GEODATA/composicionMedianaSentinel2', //! ACTUALIZAR A RUTA PROPIA
   region: area,
   scale: 10,
   maxPixels: 1e13
 });
+```
 
 > **Nota técnica:** Recuerda actualizar el `assetId` con la ruta de tu propio proyecto de Earth Engine antes de ejecutar la exportación.
 
 **Paso 13: Ejecutar las exportaciones**
 
 Ir al panel `Tasks` y presionar `Run` sobre cada tarea de exportación generada.
+
