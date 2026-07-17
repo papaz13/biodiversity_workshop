@@ -102,9 +102,9 @@ function mascaraNubesS2(imagen) {
 ```
 
 ### Funcion para calcular índices
-NDVI: (NIR-Red)/(NIR+Red)
+<!-- NDVI: (NIR-Red)/(NIR+Red)
 LSWI: (NIR-SWIR1)/(NIR+SWIR1)
-NDMI: (SWIR2-Red)/(SWIR2+Red)
+NDMI: (SWIR2-Red)/(SWIR2+Red) -->
 
 | Índice | Fórmula |
 |---|---|
