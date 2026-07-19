@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 01_Change_Detection_Embeddings
-parent: "Introducción a GEE"
+parent: "Introducción a Embedding"
 nav_order: 2
 ---
 
