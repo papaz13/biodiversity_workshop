@@ -1,11 +1,11 @@
 ---
 layout: page
-title: 00_Introduccion_Satellite_Embedding
+title: 00_Introducción a Embedding
 parent: "Introducción a Embedding"
 nav_order: 1
 ---
 
-## 00_Introduccion_Satellite_Embedding
+## Introducción a Embedding
 
 # ¿Qué es el dataset Satellite Embedding?
 

@@ -2,7 +2,7 @@
 layout: page
 title: 01_Change_Detection_Embeddings
 parent: "Introducción a Embedding"
-nav_order: 2
+nav_order: 3
 ---
 
 ## 01_Change_Detection_Embeddings
