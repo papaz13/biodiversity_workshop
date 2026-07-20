@@ -9,7 +9,7 @@ nav_order: 2
 
 ## 00_Introduccion_Satellite_Embedding
 
-# ¿Qué es el dataset Satellite Embedding?
+# ¿Qué es el dataset Satellite Embedding? 
 
 En julio de 2025, Google presentó en Earth Engine el dataset **Satellite Embedding** (`GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL`), generado con **AlphaEarth Foundations**, un modelo geoespacial de Google DeepMind. En vez de entregar bandas espectrales tradicionales (rojo, verde, infrarrojo, etc.), este dataset entrega, para cada píxel de 10 m y cada año desde 2017, un **vector numérico de 64 valores** que resume las condiciones de esa porción de terreno en ese año.
 
