@@ -7,78 +7,52 @@ nav_order: 2
 ---
 
 
+## 00_Introduccion_Satellite_Embedding
 
-# Introducción a GEE
+# ¿Qué es el dataset Satellite Embedding?
 
-## Objetivo 
-Navegar en la interfaz de Google Earth Engine (GEE), explorar conjuntos de datos globales disponibles en el Data Catalog, recortar esos conjuntos de datos para un área de interés (ROI) de su país, analizar el riesgo del ecosistema y calcular una serie de indicadores de biodiversidad.
+En julio de 2025, Google presentó en Earth Engine el dataset **Satellite Embedding** (`GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL`), generado con **AlphaEarth Foundations**, un modelo geoespacial de Google DeepMind. En vez de entregar bandas espectrales tradicionales (rojo, verde, infrarrojo, etc.), este dataset entrega, para cada píxel de 10 m y cada año desde 2017, un **vector numérico de 64 valores** que resume las condiciones de esa porción de terreno en ese año.
 
-## Set-up
-1. [Instrucciones rápidas para iniciar en GEE](https://developers.google.com/earth-engine/guides/quickstart_javascript?hl=es-419) Un proyecto de Google Cloud registrado para Earth Engine:.
-2. [Libro GEE](https://www.eefabook.org/) Teledetección Basada en la Nube con Google Earth Engine: Fundamentos y Aplicaciones".
+Ese resumen no sale de una sola fuente satelital: el modelo fue entrenado combinando imágenes ópticas y térmicas de Sentinel-2 y Landsat, radar Sentinel-1 (que atraviesa nubes), altura del dosel (GEDI), un modelo global de elevación, variables climáticas, y otras fuentes geoespaciales, incluyendo texto descriptivo asociado a cada ubicación. El resultado es lo que Google llama un "embedding": una representación compacta pero rica en información, pensada para usarse directamente en los clasificadores y algoritmos de Earth Engine, sin pasos previos de corrección atmosférica, enmascarado de nubes o cálculo de índices espectrales.
 
-# Qué es Google Earth Engine?
-“Una plataforma de escala planetária para datos y análisis geoespaciales”.
+Un detalle conceptual importante: las 64 bandas de un embedding no son medidas físicas directas (no hay una banda "roja" o una banda "de humedad"). Son coordenadas dentro de un espacio matemático de 64 dimensiones, aprendidas por el modelo. Por eso no tiene mucho sentido interpretar una banda individual de forma aislada; lo que sí tiene sentido, y es la base de casi todo lo que hacemos con este dataset, es **comparar vectores completos entre sí**.
 
-Google Earth Engine combina un catálogo de varios petabytes de imágenes satelitales y conjuntos de datos geoespaciales con capacidades de análisis a escala planetaria. Los científicos, investigadores y desarrolladores usan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie de la Tierra. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para uso académico y de investigación.
+# ¿Por qué nos interesa para este proyecto?
 
-La infraestructura de procesamiento paraleliza automáticamente el análisis en muchos procesadores en muchas computadoras en los centros de datos de Google. Eso resulta en reducción de los tiempos de procesamiento en órdenes de magnitud mediante el uso de potencia informática distribuida y basada en la nube. Además los datos están todos centralizados en la nube.
+Un pipeline de monitoreo de biodiversidad y bosque alineado al Marco Mundial de Biodiversidad Kunming-Montreal suele combinar datasets especializados: Hansen Global Forest Change para deforestación, WorldCover/Dynamic World para cobertura, WDPA y ecorregiones RESOLVE para representatividad de áreas protegidas, MODIS y Sentinel-2 para productividad, entre otros. Cada uno de esos productos está optimizado para detectar **un tipo específico** de cambio o condición.
 
-<p align="center">
-  <img src="images/intro-gee/fig1.png" width="600" style="margin: 10px 0;">
-</p>
+Satellite Embedding no reemplaza a ninguno de esos productos especializados, pero cumple un rol distinto y complementario: al resumir múltiples fuentes en un solo vector por píxel, permite detectar **cualquier tipo de cambio en la superficie** —no solo tala rasa, también degradación gradual, cambios en cuerpos de agua, expansión urbana, o transformaciones que un solo índice no capturaría— con un único cálculo relativamente simple: comparar el vector de un año contra el vector de otro año.
 
-# Conjunto de datos
-El archivo de datos públicos de Earth Engine incluye más de cuarenta años de imágenes históricas y conjuntos de datos científicos, actualizados y ampliados diariamente.
+Esto es exactamente lo que se explora en los dos scripts de la serie de taller:
 
-<p align="center">
-  <img src="images/intro-gee/fig2.png" width="600" style="margin: 10px 0;">
-</p>
-- Más de 800 conjuntos de datos públicos
-- Más de 70 petabytes de datos
-- Más de 100 conjuntos de datos agregados anualmente
-- 1+ PB de datos nuevos cada mes (esos números están siempre siendo actualizados)
+- **[01_Change_Detection_Embeddings](./01_Change_Detection_Embeddings.md)**, que detecta pérdida de bosque comparando embeddings de dos años, restringiendo la búsqueda a una máscara de bosque para distinguir pérdida de ganancia, y valida el resultado contra Hansen GFC.
+- El script de representatividad de áreas protegidas y ecorregiones (Meta 3 — 30x30), que usa un enfoque distinto (WDPA + RESOLVE) pero se beneficia del mismo principio de trabajar con datasets ya listos para análisis a escala país.
 
-Tipos de datos:
-- Imágenes de diferentes satélites
-- Datos geofísicos (topografía, hidrología)
-- Uso y cobertura de la tierra
-- Clima y tiempo
-- Datos vectoriales (Cuencas, red de transporte, etc)
+En ambos casos, la validación cruzada contra un producto especializado (Hansen) es clave: los embeddings son potentes para detectar que "algo cambió", pero no explican por sí solos qué tipo de cambio fue. Combinarlos con productos temáticos permite aprovechar lo mejor de los dos mundos: la sensibilidad amplia de los embeddings y la interpretabilidad de un producto especializado.
 
-Para explorar todos los conjuntos de datos:
-https://developers.google.com/earth-engine/datasets
-https://developers.google.com/earth-engine/datasets/catalog
+# Cómo funciona la comparación entre años
 
-<p align="center">
-  <img src="images/intro-gee/fig3.png" width="600" style="margin: 10px 0;">
-</p>
+Cada vector de embedding está normalizado a longitud 1 (es un vector unitario). Esto tiene una consecuencia práctica muy útil: comparar dos vectores del mismo píxel en dos años distintos se reduce a multiplicarlos componente a componente y sumar los 64 resultados (el producto punto), lo que equivale matemáticamente al **coseno del ángulo** entre ambos vectores.
 
+- Un valor cercano a **1.0** significa que los dos vectores son casi idénticos: el píxel se mantuvo estable entre esos dos años.
+- Un valor cercano a **0.0** significa que los vectores son muy distintos: el píxel cambió de forma sustancial, sin que el cálculo diga todavía *qué tipo* de cambio fue.
 
-## Interfaz
+Como cada embedding anual resume un año completo de observaciones, también incorpora dinámica estacional (fenología de la vegetación, ciclos de cultivo, nieve estacional), así que un umbral de similitud demasiado estricto puede confundir variabilidad normal dentro del año con cambio real —de ahí la importancia de ajustar el umbral revisando el histograma y comparando visualmente contra imágenes Sentinel-2, como se hace en el script de detección de cambios.
 
-El Editor de código (Code Editor) es un entorno de desarrollo integrado para la API JavaScript de Earth Engine. Ofrece una manera fácil de escribir, depurar, ejecutar y administrar código. Una vez que haya seguido la documentación de Google sobre el registro de una cuenta de Earth Engine, debe seguir la documentación para abrir el [Code Editor](https://code.earthengine.google.com/). Cuando visite por primera vez el Editor de código, verá una pantalla como la que se muestra abajo.
+# Otros usos posibles del dataset
 
-<p align="center">
-  <img src="images/intro-gee/fig5.png" width="600" style="margin: 10px 0;">
-</p>
+Más allá de la comparación año a año que usamos en el taller, el dataset habilita otros flujos de trabajo que pueden ser relevantes para líneas futuras del proyecto:
 
-El menú de la izquierda consta de tres pestañas: `Scripts`, `Docs`, `Assets`: En la sección `Scripts` tienes todo tu código almacenado y organizado en repositorios, carpetas, subcarpetas y archivos. Puede organizar sus scripts por proyecto y también puede compartir permisos de acceso o edición con otros usuarios de GEE. `Docs` es la [Documentación del API](https://developers.google.com/earth-engine/) con funciones y sus explicaciones. En `Assets` puedes almacenar y organizar archivos que carga desde su computadora o que descarga de GEE. En el centro, encontrará el editor de código basado en la web donde puede insertar su código JavaScript sin ninguna instalación previa de software. Con el botón `Apps`, puede desarrollar pequeñas aplicaciones automatizadas para procesar y visualizar datos de una manera e interfaz más fáciles de usar, mientras que el botón `Run` ejecuta el código. A la derecha, tenemos tres paneles principales: `Inspector`, `Console` y `Tasks`. En la zona `Console` podemos ver errores de código o valores impresos, esto nos permite depurar nuestro script. Veremos la funcionalidad de estos a medida que realicemos los próximos ejercicios.
+- **Búsqueda por similitud**: dado un punto de referencia (por ejemplo, un relicto de bosque bien conservado), encontrar automáticamente otras zonas con condiciones de superficie similares dentro del país o la región.
+- **Clustering no supervisado**: agrupar píxeles en categorías sin necesidad de datos etiquetados previamente, útil para explorar patrones de paisaje antes de invertir en un mapeo temático completo.
+- **Clasificación supervisada con pocas muestras**: entrenar clasificadores (kNN, Random Forest) usando embeddings en lugar de bandas espectrales crudas, lo que en la práctica reduce bastante la cantidad de puntos de entrenamiento necesarios para lograr buena precisión — un punto a favor cuando el trabajo de campo o la fotointerpretación son limitados.
+- **Regresión**: estimar variables continuas (por ejemplo, biomasa aérea) a partir de los embeddings y un conjunto de puntos de referencia con medición real.
 
-<p align="center">
-  <img src="images/intro-gee/fig7.png" width="600" style="margin: 10px 0;">
-</p>
-## Datos a emplear en las sesiones prácticas
-1. Imágenes Landsat-8, Sentinel-2
-2. Linea base para análisis de riesgo de ecosistemas:
-- Tipología de ecosistemas, fuente: IUCN (Level 3) - Global
-- Pérdida y ganancia de bosque , fuente: Hansen - Global
-- Aboveground Biomass, fuente:- Global
-- Ecoregiones, fuente: Global
+Estos casos de uso no están implementados todavía en este pipeline, pero quedan como posibles próximos pasos si el enfoque de detección de cambios muestra buenos resultados de validación.
 
-## Repositorio GEE
-[https://code.earthengine.google.com/?accept_repo=users/paulapaz1101/biodiversity_workshop](https://code.earthengine.google.com/?accept_repo=users/paulapaz1101/biodiversity_workshop)
+# Recursos para profundizar
 
-
-## Nota: 
-El contenido de esta sesión ha sido adaptada o tomada del libro EEFA, capítulo F1, https://www.eefabook.org/
+- Dataset en el catálogo de Earth Engine: [`GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL`](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL)
+- Artículo original de introducción del dataset (Google Earth, en inglés): [AI-powered pixels: Introducing Google's Satellite Embedding dataset](https://medium.com/google-earth/ai-powered-pixels-introducing-googles-satellite-embedding-dataset-31744c1f4650)
+- Demo interactiva de búsqueda por similitud: [goo.gle/satellite-embedding-similarity-demo](http://goo.gle/satellite-embedding-similarity-demo)
+- Serie de tutoriales oficiales de Earth Engine sobre el dataset: introducción, búsqueda por similitud, clasificación no supervisada, clasificación supervisada (mapeo de manglares) y regresión (biomasa aérea) — disponibles en [developers.google.com/earth-engine/tutorials/community](https://developers.google.com/earth-engine/tutorials/community).
