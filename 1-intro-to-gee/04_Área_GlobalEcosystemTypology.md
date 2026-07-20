@@ -111,7 +111,7 @@ var tablaChart = ui.Chart.feature.byFeature({
 print(tablaChart);
 ```
 
-### Visualización: Ecosistemas IUCN interceptados, coloreados por categoría
+### Paso 4: Visualización: Ecosistemas IUCN interceptados, coloreados por categoría
 Tomado de [https://developers.google.com/earth-engine/datasets/catalog/IUCN_GlobalEcosystemTypology_current?hl=es-419](https://developers.google.com/earth-engine/datasets/catalog/IUCN_GlobalEcosystemTypology_current?hl=es-419)
 
 ```javascript
@@ -215,3 +215,41 @@ codigosPresentes.evaluate(function(codigos) {
 
 Map.addLayer(roi, {color: 'green', opacity: 0.5}, 'Áreas Protegidas Seleccionadas');
 ``` 
+
+### Paso 5 : CÁLCULO DE ÁREAS: MAPA NACIONAL DE ECOSISTEMAS DE COLOMBIA
+
+```javascript
+var colMapFC = ee.FeatureCollection("projects/ee-paulapaz1101/assets/biodiversity_workshop/GEODATA/ecosystem_map_COL");
+var statsUnificadas_COL = calcularAreaPorCategoria(colMapFC, roi, 'ecos_gener', 'Ecos_Gener');
+```
+
+### Opcional: Visualizar la tabla de resultados de Colombia
+
+```javascript
+var tablaChart_COL = ui.Chart.feature.byFeature({
+  features: statsUnificadas_COL,
+  xProperty: 'Ecos_Gener',
+  yProperties: ['Area_Total_Ha']
+}).setChartType('Table');
+print('Tabla Colombia', tablaChart_COL);
+```
+
+### Opcional: Exportar las estadísticas de Colombia a Google Drive
+
+```javascript
+Export.table.toDrive({
+  collection: statsUnificadas_COL,
+  description: 'Chingaza_Estadisticas_Mapa_Colombia',
+  fileFormat: 'CSV',
+  selectors: ['Ecos_Gener', 'Area_Total_Ha']
+});
+```
+
+### Opcional: Visualizar el mapa de ecosistemas de Colombia (opcional)
+
+```javascript
+Map.addLayer(colMapFC, {}, 'Mapa de Ecosistemas Colombia (Chingaza)', true);
+
+### Código completo
+Script "`04_Área_GlobalEcosystemTypology`" del repositorio y la carpeta `day_1` o link directo:
+[https://code.earthengine.google.com/921e379df7db059ea8cc3cc11c31288a?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/921e379df7db059ea8cc3cc11c31288a?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
