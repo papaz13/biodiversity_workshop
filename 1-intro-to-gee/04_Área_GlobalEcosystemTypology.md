@@ -249,6 +249,7 @@ Export.table.toDrive({
 
 ```javascript
 Map.addLayer(colMapFC, {}, 'Mapa de Ecosistemas Colombia (Chingaza)', true);
+```
 
 ### Código completo
 Script "`04_Área_GlobalEcosystemTypology`" del repositorio y la carpeta `day_1` o link directo:

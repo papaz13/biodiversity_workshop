@@ -12,7 +12,7 @@ Calcula para un área de interés (AOI), el stock de carbono forestal y estima c
 - Stock de carbono aéreo (con desagregación posible entre aéreo y subterráneo en la fuente).
 - Carbono aéreo ubicado en píxeles donde hubo pérdida de bosque entre 2022 y 2024.
 
-Nota importante de terminología: 'biomasa' y 'carbono' no son lo mismo. La biomasa es el peso seco de la vegetación; el carbono es, aproximadamente, el 47-50% de esa biomasa (factor de conversión estándar del IPCC). Ambos datasets usados en este script entregan directamente carbono (Mg C/ha), no biomasa cruda, aunque uno de ellos incluye la palabra 'biomass' en su nombre 
+**Nota importante de terminología:** 'biomasa' y 'carbono' no son lo mismo. La biomasa es el peso seco de la vegetación; el carbono es, aproximadamente, el 47-50% de esa biomasa (factor de conversión estándar del IPCC). Ambos datasets usados en este script entregan directamente carbono (Mg C/ha), no biomasa cruda, aunque uno de ellos incluye la palabra 'biomass' en su nombre 
 
 ## Datos
 1. WCMC/biomass_carbon_density/v1_0 — Carbono aéreo + subterráneo (WCMC): Dataset de UNEP-WCMC (Soto-Navarro et al., 2020) que reporta, para el año 2010, el carbono combinado de biomasa aérea y subterránea (ambos compartimentos sumados y convertidos a carbono con un factor 0.5) en una sola banda, 'carbon_tonnes_per_ha' (Mg C/ha). No tiene serie temporal: es una única imagen de referencia para circa 2010.
