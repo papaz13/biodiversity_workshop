@@ -1,19 +1,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Taller: Regional Biodiversity Workshop
-// Autor: Google
-// Objetivo: Aprender lo báscico para iniciar con JavaScript
+// Autor:  EEFA Book, capítulo F1
+// Objetivo: Aprender lo básico para iniciar con JavaScript
 ////////////////////////////////////////////////////////////////////////////////
 
+
 //Variables
-var variable = 1;
-print(variable);
- 
 var string = 'Hello, World!';
 print(string);
+
+var ciudad = 'Bogotá';
+print(ciudad);
+ 
+var poblacion = 7900000;
+print(poblacion);
 
 //Listas
 var lista = [1.23, 8, -3];
 print(lista[2]);
+
+var ciudades = ['Bogotá', 'Cali', 'Medellín', 'Cartagena', 'Santa Marta'];
+print(ciudades)
 
 //Diccionario
 var diccionario = {
@@ -24,7 +31,13 @@ var diccionario = {
 };
 print(diccionario);
 print(diccionario.b);
-print(variable, string, lista, diccionario);
+
+var datosCiudad = {
+    'ciudad': 'Bogotá',
+    'coordenadas': [-74.081,4.609],
+    'poblacion': 7900000
+};
+print(datosCiudad);
 
 // Funciones
 var funcionHola = function(nombre){
@@ -34,14 +47,6 @@ var funcionHola = function(nombre){
 function funcionHola2(nombre){
   return 'Hola ' + nombre + ', mucho gusto en conocerte.';
 }
-print(funcionHola('Ramón'));
-print(funcionHola2('Rosaura'));
-
-
-// Lado del Servidor vs lado del Cliente
-var stringServidor = ee.String('Voy a lugares...');
-var stringCliente = 'Me quedo aquí';
-
-print(stringServidor);
-print(stringCliente);
+print(funcionHola('Manuel'));
+print(funcionHola2('Paula'));
 

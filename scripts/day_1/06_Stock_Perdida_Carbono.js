@@ -3,7 +3,8 @@ var WDPA = ee.FeatureCollection("WCMC/WDPA/current/polygons"),
     ECOREGIONES = ee.FeatureCollection("RESOLVE/ECOREGIONS/2017"),
     ABGB = ee.ImageCollection("WCMC/biomass_carbon_density/v1_0"),
     GABGB = ee.ImageCollection("NASA/ORNL/biomass_carbon_density/v1"),
-    GAUL0 = ee.FeatureCollection("FAO/GAUL_SIMPLIFIED_500m/2015/level0");
+    GAUL0 = ee.FeatureCollection("FAO/GAUL_SIMPLIFIED_500m/2015/level0"),
+    gfc = ee.Image("UMD/hansen/global_forest_change_2025_v1_13");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 ////////////////////////////////////////////////////////////////////////////////
 // Taller: Regional Biodiversity Workshop
@@ -99,7 +100,7 @@ print('Stock total de carbono aéreo (Mg C) — ORNL:',
 //--------------------------------------------------------------
 // 4. Carbono en riesgo por deforestación (Hansen GFC 2022-2024)
 //--------------------------------------------------------------
-var gfc = ee.Image('UMD/hansen/global_forest_change_2024_v1_12');
+//var gfc = ee.Image('UMD/hansen/global_forest_change_2024_v1_12');
 
 var perdida = gfc.select('lossyear').gte(22).and(gfc.select('lossyear').lte(24));
 

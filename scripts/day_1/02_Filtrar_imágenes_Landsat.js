@@ -1,18 +1,17 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var table = ee.FeatureCollection("FAO/GAUL/2015/level2"),
-    landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2");
+var table = ee.FeatureCollection("FAO/GAUL/2015/level0");
+var landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 ////////////////////////////////////////////////////////////////////////////////
 // Taller: Regional Biodiversity Workshop
-// Autora: Google, modified: Wilpa
+// Autor: Google, modified: Wilpa
 // Objetivo: Filtrar imágenes Landsat8 para área de país
 ////////////////////////////////////////////////////////////////////////////////
 
 //
 //1. Filtrar Colección de Features para seleccionar país de referencia: Colombia
 var region = table.filter(
-  ee.Filter.eq('ADM0_NAME', 'Colombia')
-  );
+  ee.Filter.eq('ADM0_NAME', 'Colombia'));
 
 Map.centerObject(region, 8);
 Map.addLayer(region, {}, 'Colombia');

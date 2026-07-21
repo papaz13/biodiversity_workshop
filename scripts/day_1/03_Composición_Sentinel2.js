@@ -32,25 +32,32 @@ Map.addLayer(area, {}, 'Área de Interés', false);
 
 // Inspeccione las propiedades en la descripción del conjunto de datos.
 // https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR
-var s2 = ee.ImageCollection("COPERNICUS/S2_SR");
+var s2 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED');
 
 // Filtre la colección según aoi, período de tiempo y cobertura de nubes.
 // Trabajaremos con imágenes del 2019 al 2021.
 var s2filtrado = s2.filterBounds(area)
-                   .filterDate('2019-01-01', '2022-01-01')
+                   .filterDate('2025-01-01', '2026-01-01')
                    .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20));
 
 // Imprimir la colección filtrada.
-print('Colección Filtrada Sentinel-2', s2filtrado);
+print('Número de imágenes filtradas', s2filtrado.size());
 
 
 //--------------------------------------------------------------
-// Preprocesamiento de series temporales
+// 3. Preprocesamiento de series temporales
 // (Enmascaramiento de nubes y cálculo de índices)
 //--------------------------------------------------------------
 // Preprocesamiento de series de tiempo usando funciones que se aplican
 // a todas y cada una de las imágenes de la colección.
 
+//OPCIONAL: Antes de usar funci'on de enmascaramiento verificar que para las fechas seleccionadas
+//tenga la banda 'QA60'
+s2filtrado = s2filtrado.filter(
+  ee.Filter.listContains('system:band_names', 'QA60')
+);
+
+print('Verificar imagenes tengan banda de QA60', s2filtrado.size())
 
 // Función de enmascaramiento de nubes.
 // La banda de calidad 'QA60' proporciona información sobre la ocurrencia de nubes
@@ -97,7 +104,7 @@ var s2preProcesado = s2filtrado.map(mascaraNubesS2)
 print(s2preProcesado.first());
 
 //---------------------------------------------------------------
-// Visualizar las primeras imágenes no procesadas y preprocesadas
+// 4. Visualizar las primeras imágenes no procesadas y preprocesadas
 //---------------------------------------------------------------
 
 // Seleccionar la primera imagen no procesada.
@@ -133,7 +140,7 @@ Map.addLayer(primeraPreProcesada,
 
 
 //--------------------------------------------------------------
-// Crear una composición
+// 5. Crear una composición
 //--------------------------------------------------------------
 // Utilice las siguientes funciones para comparar diferentes agregaciones:
 // .min(); .max(); .mean(); .median()
@@ -160,10 +167,10 @@ Map.addLayer(mosaicoMasReciente, paramVisPreProcesada, 'Mosaico Más Reciente');
 
 
 //--------------------------------------------------------------
-// Exportar composición para el Drive o como un Asset
+// 6. OPCIONAL: Exportar composición para el Drive o como un Asset
 //--------------------------------------------------------------
 
-// Exportar para Google Drive.
+Exportar para Google Drive.
 Export.image.toDrive({
   image: composicion.toFloat(),
   description: 'composicionMedianaSentinel2_1921',
@@ -177,7 +184,7 @@ Export.image.toDrive({
 Export.image.toAsset({
   image: composicion,
   description: 'composicionMedianaSentinel2_1921',
-  assetId: 'projects/caribbean-trainings/assets/dominican-republic-2022/images/composicionMedianaSentinel2_1921', //! ACTUALIZAR A RUTA PROPIA
+  assetId: 'projects/ee-paulapaz1101/assets/biodiversity_workshop/GEODATA/composicionMedianaSentinel2', //! ACTUALIZAR A RUTA PROPIA
   region: area,
   scale: 10,
   maxPixels: 1e13
