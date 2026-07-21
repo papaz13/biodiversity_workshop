@@ -27,6 +27,9 @@ Estos scripts están elaborados para el manejo de datos de biodiversidad en GEE,
 | 3               | Carbon Biomass Baselines using embedding.| July 23 2026  | 
 
 
+## Presentación
+[Scripts exploratorios para la Biodiversidad Regional en GEE](https://docs.google.com/presentation/d/1RsbimVSiEG6QwWCJ5zU3ipPkDqcdsSSk/edit?usp=sharing&ouid=102108997537890089824&rtpof=true&sd=true)
+
 ## Cómo los ejercicios prácticos apoyan los objetivos y los indicadores de biodiversidad del GBF
 [Matriz scripts de biodiversidad](https://docs.google.com/spreadsheets/d/1Aqy3D4K-hODrKs1q8t0R5WmYym1kR5in/edit?usp=sharing&ouid=102108997537890089824&rtpof=true&sd=true)
 
