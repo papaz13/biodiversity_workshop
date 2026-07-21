@@ -93,6 +93,7 @@ Mientras se escribe código, es útil agregar texto para explicarlo o dejar una 
 El Editor de código también proporciona un atajo (`Ctrl + /` en Windows, `Cmd + /` en Mac) para comentar o descomentar varias líneas a la vez. Se pueden seleccionar varias líneas y presionar la combinación de teclas para convertirlas todas en comentarios; al pulsar de nuevo se revierte la operación. Esto es útil al depurar código, para detener temporalmente la ejecución de ciertas partes del script.
 
 **Código completo:** Script `00_Básico_JavaScript` del repositorio, carpeta `day_1`, o enlace directo: [https://code.earthengine.google.com/634c52426782f6c280517c558fba80dd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/634c52426782f6c280517c558fba80dd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
+
 00_Basico_JavaScript.md
 Mostrando 00_Basico_JavaScript.md.
 
