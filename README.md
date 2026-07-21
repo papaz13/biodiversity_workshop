@@ -15,18 +15,21 @@ El taller está organizado en tres módulos:
 Los scripts de Google Earth Engine usados en cada sesión están en la carpeta [`scripts/`](scripts/), organizados por día (`day_1`, `day_2`, `day_3`).
 
 ## Estructura del repositorio
-This repository is a template to set up a website on [`github-pages`](https://pages.github.com/) that hosts all the content (step-by-step instructions, slides, code, ) for training workshops.
-biodiversity_workshop/
-├── 1-intro-to-gee/ # Material y guías del día 1
-├── 2-ecosystems-changes/ # Material y guías del día 2
-├── 3-agb-biomass/ # Material y guías del día 3
-├── scripts/ # Scripts de GEE organizados por día
-├── images/ # Imágenes y figuras usadas en el sitio
-├── index.md # Página principal del sitio
-├── partners.md # Socios y colaboradores
-├── resources.md # Recursos adicionales
-└── _config.yml # Configuración de GitHub Pages
 
+Este repositorio es una plantilla para configurar un sitio web con [`github-pages`](https://pages.github.com/) que aloja todo el contenido (instrucciones paso a paso, diapositivas, código) de talleres de capacitación.
+
+```
+biodiversity_workshop/
+├── 1-intro-to-gee/         # Material y guías del día 1
+├── 2-ecosystems-changes/   # Material y guías del día 2
+├── 3-agb-biomass/          # Material y guías del día 3
+├── scripts/                # Scripts de GEE organizados por día
+├── images/                 # Imágenes y figuras usadas en el sitio
+├── index.md                # Página principal del sitio
+├── partners.md             # Socios y colaboradores
+├── resources.md            # Recursos adicionales
+└── _config.yml             # Configuración de GitHub Pages
+```
 :construction: Under Construction :construction:
 
 :construction: Everything below this line is under construction and not final :construction:
