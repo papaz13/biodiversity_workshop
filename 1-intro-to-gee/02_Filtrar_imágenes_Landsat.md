@@ -16,6 +16,7 @@ nav_order: 3
   <p align="center">
   <img src="{{ '/images/intro-gee/fig11.png' | relative_url }}" width="600" style="margin: 10px 0;">
 </p>
+
 - Imágenes Landsat 8 Collection 2, Nivel 2, collection: `LANDSAT/LC08/C02/T1_L2`
 <p align="center">
   <img src="{{ '/images/intro-gee/fig9.png' | relative_url }}" width="600" style="margin: 10px 0;">
@@ -26,6 +27,133 @@ nav_order: 3
 - Uso de operadores de comparación `.gt()` (greater than, "mayor que"), `.lt()` (menor que), o `.eq()` (igual a).
 
 ## Paso a paso
+## Paso 1: Cargar el conjunto de datos y definir el AOI
+
+Importar la colección de límites administrativos (`FAO/GAUL/2015/level0`, nivel país) y la colección de imágenes Landsat 8 Collection 2, Nivel 2 (`LANDSAT/LC08/C02/T1_L2`), usando `ee.FeatureCollection()` y `ee.ImageCollection()` respectivamente.
+
+```javascript
+var table = ee.FeatureCollection("FAO/GAUL/2015/level0");
+var landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2");
+```
+
+> **Nota técnica:** `FAO/GAUL/2015/level0` contiene un feature por cada país del mundo. Al usar `level0` (en lugar de `level2`), cada país corresponde a un único polígono, lo que facilita operaciones posteriores como `Map.centerObject()`.
+
+**Parámetros:**
+- **`ee.FeatureCollection("FAO/GAUL/2015/level0")`**: Carga la colección de límites administrativos a nivel país (nivel 0 de la jerarquía GAUL, es decir, sin subdivisiones internas).
+- **`ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")`**: Carga la colección completa de Landsat 8 Collection 2, Tier 1, Nivel 2 (reflectancia de superficie ya corregida atmosféricamente), sin ningún filtro todavía.
+
+**Filtrar la colección de países para obtener Colombia:**
+
+```javascript
+var region = table.filter(
+  ee.Filter.eq('ADM0_NAME', 'Colombia'));
+```
+
+**Parámetros:**
+- **`table.filter(ee.Filter.eq('ADM0_NAME', 'Colombia'))`**: Selecciona, dentro de la colección de países, el feature cuyo atributo `ADM0_NAME` sea exactamente `'Colombia'`. `ee.Filter.eq()` es un filtro de igualdad exacta.
+
+**Centrar el mapa y visualizar la región:**
+
+```javascript
+Map.centerObject(region.geometry(), 8);
+Map.addLayer(region, {}, 'Colombia');
+```
+
+**Parámetros:**
+- **`Map.centerObject(region.geometry(), 8)`**: Centra el visor sobre la geometría de `region`. El segundo argumento (8) es el nivel de zoom inicial.
+- **`Map.addLayer(region, {}, 'Colombia')`**: Agrega el contorno del país al mapa con estilo por defecto (`{}`), visible desde el inicio.
+
+## Paso 2: Filtrar imágenes Landsat 8 por fecha y región
+
+Aplicar `.filterDate()` para restringir la colección a un rango de fechas, y `.filterBounds()` para limitar las imágenes a aquellas que intersectan la geometría de `region`.
+
+```javascript
+var filtrado = landsat8
+  .filterDate('2016-01-01', '2020-01-01')
+  .filterBounds(region);
+```
+
+```javascript
+print('Colección Landsat 8', filtrado);
+print('Número de imágenes', filtrado.size());
+```
+
+**Parámetros:**
+- **`.filterDate('2016-01-01', '2020-01-01')`**: Conserva solo las imágenes capturadas dentro de ese rango de cuatro años.
+- **`.filterBounds(region)`**: Conserva solo las imágenes cuya huella (footprint) intersecta la geometría de `region`; a diferencia de otros scripts del taller, acá se le pasa la `FeatureCollection` completa (no `.geometry()`), lo cual funciona igual porque `filterBounds()` acepta cualquier objeto convertible a geometría.
+- **`print('Colección Landsat 8', filtrado)`**: Imprime en la consola el objeto completo de la colección filtrada (metadatos, lista de imágenes, propiedades), útil para inspeccionar manualmente propiedades individuales de cada escena.
+- **`filtrado.size()`**: Cuenta cuántas imágenes cumplen ambos filtros (fecha + ubicación); revisar este número en el panel `Console` antes de continuar ayuda a detectar temprano si el rango de fechas o el AOI dejaron la colección vacía o con muy pocas escenas.
+
+## Paso 3: Generar una composición de mediana y recortarla a la región
+
+Usar `.median()` sobre la colección filtrada para generar una única imagen compuesta, calculando el valor mediano de cada píxel a través de todas las imágenes disponibles en el rango de fechas del Paso 2. Luego, usar `.clip()` para recortar el resultado a los límites de `region`.
+
+```javascript
+var mediana = filtrado.median();
+var cortado = mediana.clip(region);
+```
+
+**Parámetros:**
+- **`filtrado.median()`**: Colapsa toda la `ImageCollection` en una sola imagen, tomando la mediana píxel a píxel entre todas las observaciones válidas de cada banda. Es más robusta frente a nubes o valores atípicos residuales que un simple promedio.
+- **`mediana.clip(region)`**: Recorta la composición resultante a los límites de Colombia, ya que `.median()` opera sobre toda la extensión de las imágenes originales, no solo dentro del AOI.
+
+## Paso 4: Seleccionar las bandas de color visible
+
+Usar `.select()` para extraer únicamente las bandas correspondientes al rojo (`SR_B4`), verde (`SR_B3`) y azul (`SR_B2`), necesarias para una visualización en color natural (RGB).
+
+```javascript
+var resultado = cortado.select('SR_B4', 'SR_B3', 'SR_B2');
+Map.addLayer(resultado, {min: 7230, max: 15000}, 'Cortado');
+```
+
+> **Nota técnica:** Los valores `min` y `max` (7230–15000) ajustan el contraste de visualización según el rango de reflectancia de superficie (`SR`) característico del producto Collection 2, Nivel 2 de Landsat 8. Para conocer los nombres de las bandas de la colección, revisar en el Data Catalog → BANDS.
+
+<p align="center">
+  <img src="{{ '/images/intro-gee/fig10.png' | relative_url }}" width="600" style="margin: 10px 0;">
+</p>
+
+**Parámetros:**
+- **`cortado.select('SR_B4', 'SR_B3', 'SR_B2')`**: Se queda únicamente con las tres bandas necesarias para una composición RGB en color natural, en el orden rojo-verde-azul.
+- **`Map.addLayer(resultado, {min: 7230, max: 15000}, 'Cortado')`**: Agrega la capa al mapa. `min`/`max` definen el rango de valores de reflectancia (en la escala entera de Collection 2, no fraccional) que se mapea al rango de brillo 0–255 de cada canal de color, para que la imagen se vea con buen contraste en vez de saturada o muy oscura.
+
+## Paso 5: Filtrar imágenes por porcentaje de cobertura de nubes
+
+Aplicar un filtro adicional sobre la colección `filtrado` usando `ee.Filter.lt()`, para conservar únicamente las imágenes cuyo atributo `CLOUD_COVER_LAND` sea menor a 20 (es decir, menos del 20% de nubes sobre tierra).
+
+```javascript
+var filtradoNubes = filtrado.filter(ee.Filter.lt('CLOUD_COVER_LAND',20));
+print('Número de imágenes con filtro de nubes', filtradoNubes.size());
+```
+
+**Parámetros:**
+- **`ee.Filter.lt('CLOUD_COVER_LAND', 20)`**: Filtro de comparación: conserva solo las imágenes donde el metadato `CLOUD_COVER_LAND` (porcentaje de nubes calculado sobre superficie terrestre, no sobre agua) es estrictamente menor a 20.
+- **`filtradoNubes.size()`**: Comparar este valor contra `filtrado.size()` (Paso 2) muestra cuántas imágenes fueron descartadas específicamente por el filtro de nubes.
+
+**Generar y visualizar la composición filtrada por nubes:**
+
+Repetir el proceso de mediana, recorte y selección de bandas, esta vez sobre la colección `filtradoNubes`, y agregar el resultado al mapa como una nueva capa.
+
+```javascript
+var medianaNubes = filtradoNubes.median();
+var cortadoNubes = medianaNubes.clip(region);
+var resultado = cortadoNubes.select('SR_B4', 'SR_B3', 'SR_B2');
+Map.addLayer(resultado, {min: 7230, max: 15000}, 'Cortado con filtro de nubes');
+```
+
+**Parámetros:**
+- **La misma secuencia que en los Pasos 3 y 4** (`.median()` → `.clip()` → `.select()` → `Map.addLayer()`), aplicada esta vez a `filtradoNubes` en vez de a `filtrado`, para poder comparar ambas composiciones lado a lado en el mapa.
+
+**Comparar resultados:** usar el panel `Layers` del mapa para alternar la visibilidad entre las capas `Cortado` y `Cortado con filtro de nubes`, y observar si el filtro de nubes mejora o no la calidad visual de la composición.
+
+> **Nota:** Filtrar por menos del 20% de cobertura de nubes sobre tierra debería, en teoría, generar una mejor composición. Sin embargo, esto no siempre ocurre, ya que los algoritmos de enmascaramiento de nubes de Landsat no son 100% precisos en todos los casos.
+
+**Actividad sugerida:**
+- Revisar la cantidad de imágenes devueltas al filtrar con `lt` (menor que), así como los metadatos (`properties`) de algunas imágenes individuales dentro de la colección.
+- Cambiar el filtro de `ee.Filter.lt()` a `ee.Filter.gt()` (mayor que) y observar cómo cambia la composición resultante al conservar únicamente las imágenes con **más** del 20% de cobertura de nubes.
+
+**Código completo:** Script `02_Filtrar_imágenes_Landsat` del repositorio, carpeta `day_1`, o enlace directo: [https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
+
+<!-- ## Paso a paso
 
 ### Paso 1: Cargar conjunto de datos desde el Data Catalog
 Importar la colección de límites administrativos (`FAO/GAUL/2015/level0`, nivel país) y la colección de imágenes Landsat 8 Collection 2, Nivel 2 (`LANDSAT/LC08/C02/T1_L2`), usando funciones `ee.FeatureCollection()` y `ee.ImageCollection()` respectivamente.
@@ -131,4 +259,4 @@ Use el panel `Layers` del mapa para alternar la visibilidad entre las capas `Cor
 
 ### Código completo
 Script "`02_Filtrar_imágenes_Landsat`" del repositorio y la carpeta `day_1` o link directo:
-[https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
+[https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/45446b456b63abfc2111b7e19cfc07bc?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop) -->
