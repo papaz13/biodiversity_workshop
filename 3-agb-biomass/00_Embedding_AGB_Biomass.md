@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 00_Embedding_AGB_Biomass
-parent: "Introducción a AGB Biomass"
+parent: "Introducción AGB Biomass"
 nav_order: 6
 ---
 
