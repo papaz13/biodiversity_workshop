@@ -1,1 +1,19 @@
+## Scripts del taller
 
+La carpeta `scripts/` contiene los ejercicios de Google Earth Engine organizados por día:
+
+### Día 1 — Introducción a Google Earth Engine
+- `00_Básico_JavaScript.js` — Fundamentos de JavaScript para Earth Engine.
+- `01_Visualización_imágen.js` — Visualización básica de imágenes satelitales.
+- `02_Filtrar_imágenes_Landsat.js` — Filtrado de colecciones de imágenes Landsat.
+- `03_Composición_Sentinel2.js` — Composiciones de imágenes Sentinel-2.
+- `04_Área_GlobalEcosystemTypology.js` — Cálculo de áreas con la tipología global de ecosistemas.
+- `05_Representatividad_AP_Ecoregiones.js` — Representatividad de áreas protegidas por ecorregión.
+- `06_Stock_Perdida_Carbono.js` — Estimación de stock y pérdida de carbono.
+
+### Día 2 — Cambios en ecosistemas
+- `00_Similaridad_Embeddings.js` — Análisis de similitud usando embeddings satelitales.
+- `01_Change_Detection.js` — Detección de pérdida de bosque comparando embeddings anuales dentro de un área de interés.
+
+### Día 3 — Biomasa aérea (AGB)
+- `01_AGB_Biomasa_Embedding.js` — Estimación de biomasa aérea (AGB) usando embeddings satelitales.
