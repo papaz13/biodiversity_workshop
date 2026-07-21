@@ -1,6 +1,31 @@
 # Regional Biodiversity Workshop
 
+Este repositorio tiene el contenido del taller **Regional Biodiversity Workshop**, incluyendo instrucciones paso a paso, materiales de apoyo y scripts de Google Earth Engine (GEE). Está configurado como un sitio web mediante `github-pages`.
+
+## Contenido del taller
+
+El taller está organizado en tres módulos:
+
+- **[1. Introducción a Google Earth Engine](1-intro-to-gee/)** — Fundamentos de JavaScript, visualización de imágenes satelitales, filtrado de colecciones Landsat/Sentinel-2, y análisis de ecorregiones y carbono.
+- **[2. Cambios en ecosistemas](2-ecosystems-changes/)** — Análisis de similitud y detección de cambios usando embeddings satelitales.
+- **[3. Biomasa aérea (AGB)](3-agb-biomass/)** — Estimación de biomasa aérea con embeddings satelitales.
+
+## Scripts
+
+Los scripts de Google Earth Engine usados en cada sesión están en la carpeta [`scripts/`](scripts/), organizados por día (`day_1`, `day_2`, `day_3`).
+
+## Estructura del repositorio
 This repository is a template to set up a website on [`github-pages`](https://pages.github.com/) that hosts all the content (step-by-step instructions, slides, code, ) for training workshops.
+biodiversity_workshop/
+├── 1-intro-to-gee/ # Material y guías del día 1
+├── 2-ecosystems-changes/ # Material y guías del día 2
+├── 3-agb-biomass/ # Material y guías del día 3
+├── scripts/ # Scripts de GEE organizados por día
+├── images/ # Imágenes y figuras usadas en el sitio
+├── index.md # Página principal del sitio
+├── partners.md # Socios y colaboradores
+├── resources.md # Recursos adicionales
+└── _config.yml # Configuración de GitHub Pages
 
 :construction: Under Construction :construction:
 
