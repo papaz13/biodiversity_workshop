@@ -86,6 +86,7 @@ Map.addLayer(zonas,
 - **`"Elevación clasificada"`**: Nombre de la nueva capa en el panel `Layers`, distinto del nombre `"Elevacion"` usado en el Paso 2 para la capa sin clasificar, de forma que ambas queden disponibles simultáneamente para comparar.
 
 **Código completo:** Script `01_Visualización_imágen` del repositorio, carpeta `day_1`, o enlace directo: [https://code.earthengine.google.com/fb060a9e239501ce553cbf9257b073fd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/fb060a9e239501ce553cbf9257b073fd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
+
 <!-- ## Paso a paso
 
 ### Paso 1: Cargar conjunto de datos del Earth Catalog
