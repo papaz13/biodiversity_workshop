@@ -94,8 +94,8 @@ El Editor de código también proporciona un atajo (`Ctrl + /` en Windows, `Cmd 
 
 **Código completo:** Script `00_Básico_JavaScript` del repositorio, carpeta `day_1`, o enlace directo: [https://code.earthengine.google.com/634c52426782f6c280517c558fba80dd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/634c52426782f6c280517c558fba80dd?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
 
-00_Basico_JavaScript.md
-Mostrando 00_Basico_JavaScript.md.
+<!-- 00_Basico_JavaScript.md
+Mostrando 00_Basico_JavaScript.md. -->
 
 
 <!-- # 00_Básico_JavaScript
