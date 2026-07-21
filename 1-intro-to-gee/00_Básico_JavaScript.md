@@ -6,29 +6,6 @@ nav_order: 1
 ---
 
 
-
-Ir al contenido
-Uso de Gmail con lectores de pantalla
-
-1 de 29.188
-MD para gitHub
-Recibidos
-
-Manuel Custodio
-Archivos adjuntos
-8:22 (hace 10 minutos)
-para mí
-
-
- 5 archivos adjuntos
-  •  Analizados por Gmail
----
-layout: page
-title: 00_Básico_JavaScript
-parent: "Introducción a GEE"
-nav_order: 1
----
-
 ## 00_Básico_JavaScript
 
 Para poder construir un script para su análisis, es necesario usar JavaScript. Esta sección cubre la sintaxis de JavaScript y las estructuras de datos básicas en Earth Engine.
