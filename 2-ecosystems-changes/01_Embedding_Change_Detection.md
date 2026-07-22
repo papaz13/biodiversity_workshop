@@ -287,4 +287,4 @@ Map.setOptions('HYBRID');
 - **`Map.centerObject(geometry, 9)`**: Centra el visor de mapa sobre el AOI original. El segundo argumento (9) es el nivel de zoom inicial.
 - **`Map.setOptions('HYBRID')`**: Cambia la capa base del visor a imagen satelital con nombres de calles y lugares superpuestos.
 
-**Código completo:** [https://code.earthengine.google.com/ecbd0149dcf75be07c0f7c45f1ddc3d2](https://code.earthengine.google.com/ecbd0149dcf75be07c0f7c45f1ddc3d2)
+**Código completo:** [https://code.earthengine.google.com/6a4e6d8e33f7c8b945b27352ead4b546](https://code.earthengine.google.com/6a4e6d8e33f7c8b945b27352ead4b546)

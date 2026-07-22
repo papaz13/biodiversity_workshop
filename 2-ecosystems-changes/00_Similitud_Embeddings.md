@@ -289,4 +289,4 @@ var etiquetaArea = 'Chingaza'; // ajustar según el AOI activo (paso 1)
 - **`Export.image.toDrive({...})`**: Exporta el ráster continuo de similitud, usando `geometria` como región y `escala` (10 m) como resolución, coherente con la resolución nativa del dataset usada en el resto del script.
 - **Bloques comentados**: Las tres exportaciones están comentadas por defecto porque son tareas pesadas (especialmente sobre un AOI a escala país) y deben iniciarse manualmente desde la pestaña "Tasks" del editor; descomentar solo la exportación que se necesite en cada corrida evita generar tareas innecesarias.
 
-**Código completo:** _(pegar acá el enlace de code.earthengine.google.com una vez guardado el script en el editor)_
+**Código completo:** [https://code.earthengine.google.com/58c046a7792a7a899e6eb2ea63d18ce4](https://code.earthengine.google.com/58c046a7792a7a899e6eb2ea63d18ce4)
