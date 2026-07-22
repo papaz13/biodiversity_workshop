@@ -242,4 +242,6 @@ El corredor se vectoriza (`rasterio.features.shapes`) y se agrega al mapa como u
 3. Correr de nuevo código COLAB.
 4. Compartir resultados!
 
+# Recurso
+[Global Safety Net](https://www.globalsafetynet.app/viewer/)
 
