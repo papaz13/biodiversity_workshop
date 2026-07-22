@@ -9,4 +9,4 @@ nav_order: 1
 
 
 
-**Código completo:** [https://code.earthengine.google.com/e1e695b23f6de1b60908fe8d11b68098](https://code.earthengine.google.com/e1e695b23f6de1b60908fe8d11b68098)
+**Código completo:** [https://colab.research.google.com/drive/14rxxDr-bTf7AhS1nl65rnkolJwH37k9M?usp=sharing](https://colab.research.google.com/drive/14rxxDr-bTf7AhS1nl65rnkolJwH37k9M?usp=sharing)
