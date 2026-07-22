@@ -1,7 +1,7 @@
 ---
 layout: page
-title: 00_Conectividad
-parent: "Introducción a Embedding"
+title: 07_Conectividad
+parent: "Introducción a GEE"
 nav_order: 1
 ---
 
