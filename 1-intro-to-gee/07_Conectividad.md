@@ -235,3 +235,11 @@ Map
 El corredor se vectoriza (`rasterio.features.shapes`) y se agrega al mapa como una capa de Earth Engine en lugar de como raster local: `geemap` renderiza rasters locales mediante `localtileserver`, una librería que no funciona dentro de Colab. Vectorizar y usar `Map.addLayer` evita esa limitación y de paso deja el corredor como una geometría reutilizable (por ejemplo, para calcular su área en hectáreas).
 
 **Código completo:** [https://colab.research.google.com/drive/14rxxDr-bTf7AhS1nl65rnkolJwH37k9M?usp=sharing](https://colab.research.google.com/drive/14rxxDr-bTf7AhS1nl65rnkolJwH37k9M?usp=sharing)
+
+# Actividad
+1. Seleccionar dos áreas protegidas de interés - usar visualizador de Áreas Protegidas de WDPA para encontrar nombre de AOI [https://code.earthengine.google.com/20ec4dfc9372c575dec3351fd54822aa?hl=es-419](https://code.earthengine.google.com/20ec4dfc9372c575dec3351fd54822aa?hl=es-419).
+2. Definir nombre de país donde se encuentran AP.
+3. Correr de nuevo código COLAB.
+4. Compartir resultados!
+
+
