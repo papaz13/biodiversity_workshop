@@ -17,7 +17,6 @@ Estos scripts están elaborados para el manejo de datos de biodiversidad en GEE,
 3. Desarrollar capacidades prácticas para personalizar el Índice de Integridad de Ecosistemas mediante incrustaciones satelitales (liderado por el PNUMA-WCMC).
 4. Facilitar el aprendizaje entre pares y el intercambio de experiencias entre especialistas en teledetección de seis países, identificando brechas de datos comunes y oportunidades de cooperación regional.
 
-## Website taller
 ## Website biodiversity-humboldt [https://sites.google.com/view/biodiversity-humboldt/home](https://sites.google.com/view/biodiversity-humboldt/home) 
 
 ## Agenda ejercicios Google Earth Engine
