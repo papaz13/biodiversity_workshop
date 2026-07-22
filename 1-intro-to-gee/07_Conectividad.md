@@ -2,7 +2,7 @@
 layout: page
 title: 07_Conectividad
 parent: "Introducción a GEE"
-nav_order: 1
+nav_order: 8
 ---
 
 ## 00_Corredores_Conectividad_geemap
