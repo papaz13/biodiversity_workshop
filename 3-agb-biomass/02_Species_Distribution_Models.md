@@ -293,7 +293,6 @@ Export.table.toDrive({
 - **`unmask(-9999)`** — asigna un valor centinela a los píxeles sin datos (fuera de la máscara de agua/AOI) antes de exportar el mapa binario con umbral, para evitar ambigüedad entre "ausencia" y "sin datos" al reimportar el ráster en otro software.
 - **`region: pais`** — todos los productos raster se recortan y exportan al límite del país (Colombia en el caso de estudio), no al AOI completo con el búfer de 50 km.
 - El script también exporta los conjuntos de entrenamiento y validación de la primera iteración (`TrainingDatasets.get(0)`, `TestingDatasets.get(0)`) como CSV, útiles para auditar manualmente qué puntos se usaron en una corrida específica.
-> **Nota de transcripción:** en la Sección 9 del script original hay dos bloques `Export.table.toDrive` consecutivos con el mismo `description: 'TestingDataRun1'` (uno exportando `TrainingDatasets.get(0)` y otro `TestingDatasets.get(0)`). Es un error de copiar/pegar en el nombre — Google Drive los diferenciará solo por sufijo numérico automático, sin indicar cuál es entrenamiento y cuál validación. Se recomienda renombrar el primero a `'TrainingDataRun1'` antes de ejecutar el script.
 
 **Código completo:** 
 
