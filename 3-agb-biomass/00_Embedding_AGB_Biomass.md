@@ -26,6 +26,10 @@ Collection: `ee.ImageCollection('ESA/WorldCover/v200')`
 
 # Métodos
 
+<p align="center">
+  <img src="{{ '/images/abg_biomass/pipeline_agb_manglares.png ' | relative_url }}" width="400" style="margin: 10px 0;">
+</p>
+
 1. Preparación de predictores (Satellite Embedding) y variable respuesta (GEDI L4A)
 3. Enmascaramiento de calidad de GEDI (calidad de pulso, error relativo, pendiente)
 4. Remuestreo y alineación espacial de ambas capas a una grilla común
