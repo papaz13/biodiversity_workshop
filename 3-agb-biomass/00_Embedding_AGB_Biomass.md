@@ -713,7 +713,11 @@ Export.image.toDrive({
 - **`fileFormat: 'CSV'`**: Formato del archivo tabular exportado. Otros valores válidos para tablas son `'SHP'` (Shapefile), `'GeoJSON'` y `'KML'` — estos dos últimos requieren que los features tengan geometría, lo cual no es el caso de `ecoStats` (son features con `geometry: null`).
 - **`Export.image.toDrive({...})` (bloque comentado)**: Exporta una imagen (acá, el raster binario `apImg`) en vez de una tabla. `image` es la imagen a exportar; `region` define el área geográfica a exportar (se usa el rectángulo envolvente por la misma razón de rendimiento explicada en el Paso 1); `scale` y `maxPixels` cumplen el mismo rol que en `reduceRegion` (Sección 3).
 
-**Código completo:** [https://code.earthengine.google.com/ede3f4c12ec8512f68d73d23d5735d82?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/ede3f4c12ec8512f68d73d23d5735d82?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
+**Código completo:** 
+
+En Colab [https://drive.google.com/file/d/1us8hSAnlKdhw0wm27PDdD08iqN5IMkoa/view?usp=sharing](https://drive.google.com/file/d/1us8hSAnlKdhw0wm27PDdD08iqN5IMkoa/view?usp=sharing)
+
+En GEE [https://code.earthengine.google.com/ede3f4c12ec8512f68d73d23d5735d82?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop](https://code.earthengine.google.com/ede3f4c12ec8512f68d73d23d5735d82?asset=projects%2Fee-paulapaz1101%2Fassets%2Fbiodiversity_workshop)
 
 
 
