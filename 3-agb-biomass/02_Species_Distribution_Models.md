@@ -294,13 +294,6 @@ Export.table.toDrive({
 - **`region: pais`** — todos los productos raster se recortan y exportan al límite del país (Colombia en el caso de estudio), no al AOI completo con el búfer de 50 km.
 - El script también exporta los conjuntos de entrenamiento y validación de la primera iteración (`TrainingDatasets.get(0)`, `TestingDatasets.get(0)`) como CSV, útiles para auditar manualmente qué puntos se usaron en una corrida específica.
 > **Nota de transcripción:** en la Sección 9 del script original hay dos bloques `Export.table.toDrive` consecutivos con el mismo `description: 'TestingDataRun1'` (uno exportando `TrainingDatasets.get(0)` y otro `TestingDatasets.get(0)`). Es un error de copiar/pegar en el nombre — Google Drive los diferenciará solo por sufijo numérico automático, sin indicar cuál es entrenamiento y cuál validación. Se recomienda renombrar el primero a `'TrainingDataRun1'` antes de ejecutar el script.
- 
-## Notas metodológicas generales
- 
-- **Perfilado ambiental vs. alternativas más simples:** el script deja documentadas tres estrategias de generación de pseudo-ausencias (aleatoria en todo el AOI, restringida por búfer de distancia, y perfilado ambiental por K-medias). Solo la última queda activa; cambiar de estrategia implica comentar/descomentar bloques completos en la Sección 4, no solo parámetros.
-- **Bloques espaciales, no puntos aleatorios:** la partición entrenamiento/validación se hace por **bloques geográficos completos** (`Grid`, celdas de 200 km), no por puntos individuales. Esto es intencional: evita que puntos de entrenamiento y validación queden espacialmente autocorrelacionados (muy cercanos entre sí), lo que sobreestimaría artificialmente la precisión del modelo.
-- **Reproducibilidad:** las 10 semillas del ensamble son fijas y manuales, no generadas por `runif()`, precisamente para que cualquier persona que corra el script obtenga exactamente los mismos resultados.
-- **Autoría original:** el script es una adaptación en español del código publicado por Crego, Stabach y Connette (Smithsonian National Zoo and Conservation Biology Institute) para la implementación de SDM en Google Earth Engine; la atribución debe mantenerse en cualquier material derivado del taller.
 
 **Código completo:** 
 
