@@ -301,4 +301,7 @@ Export.table.toDrive({
 - **Bloques espaciales, no puntos aleatorios:** la partición entrenamiento/validación se hace por **bloques geográficos completos** (`Grid`, celdas de 200 km), no por puntos individuales. Esto es intencional: evita que puntos de entrenamiento y validación queden espacialmente autocorrelacionados (muy cercanos entre sí), lo que sobreestimaría artificialmente la precisión del modelo.
 - **Reproducibilidad:** las 10 semillas del ensamble son fijas y manuales, no generadas por `runif()`, precisamente para que cualquier persona que corra el script obtenga exactamente los mismos resultados.
 - **Autoría original:** el script es una adaptación en español del código publicado por Crego, Stabach y Connette (Smithsonian National Zoo and Conservation Biology Institute) para la implementación de SDM en Google Earth Engine; la atribución debe mantenerse en cualquier material derivado del taller.
- 
+
+**Código completo:** 
+
+Repositorio GEE [https://code.earthengine.google.com/?accept_repo=users/nleuro/SDM](https://code.earthengine.google.com/?accept_repo=users/nleuro/SDM) 
